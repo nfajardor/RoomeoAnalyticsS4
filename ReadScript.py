@@ -64,8 +64,18 @@ def option7():
             print("The QR scanning function has been used a total of " + str(d['uses']) + " times")
 def option8():
     docs = db.collection('Analytics').get()
+    print("Please write the uniandes email of the user (without the @uniandes.edu.co)")
+    user = input()
+    docName = 'reserveCancelation-'+user+'@uniandes.edu.co'
+    found = False
     for doc in docs:
-        print('a')
+        if doc.id == docName:
+            d = doc.to_dict()
+            print("The user " + user + " has cancelled a total of " + str(d['ammount']) + " reservations")
+            found = True
+    if not found:
+        print("There were either no reservations cancelled by the user " + user + " or the user in question does not exist")
+
 def option9():
     print("You have selected option 9")
 
